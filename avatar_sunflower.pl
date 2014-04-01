@@ -1,12 +1,22 @@
 #!/usr/bin/perl
 use Image::Magick;	# apt-get install perlmagick
 
+my $BACKGROUND = 'background_g0v.png';
+
 my $image = Image::Magick->new;
 $image->Set(size => '720x580');
-$image->ReadImage('canvas:black');
+
+if(-f $BACKGROUND)
+{
+	$image->Read($BACKGROUND);
+}
+else
+{
+	$image->ReadImage('canvas:black');
+}
 
 $image->Annotate(
-	gravity => 'south',
+	gravity => 'SouthWest',
 	pointsize => 100,
 	stroke => 'white',
 	fill => 'white',
@@ -18,11 +28,11 @@ $image->Extent(
 	width => 720,
 	height => 720,
 	background => 'black',
-	gravity => 'south',
+	gravity => 'South',
 );
 
 $image->Annotate(
-	gravity => 'south',
+	gravity => 'SouthWest',
 	pointsize => 60,
 	stroke => 'white',
 	fill => 'white',
